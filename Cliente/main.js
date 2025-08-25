@@ -32,7 +32,7 @@ function carregarItens() {
         const item = itemSnap.val();
         const option = document.createElement('option');
         option.value = item.nome;
-        option.textContent = `${item.nome} (R$${item.preco.toFixed(2)})`;
+        option.textContent = `${item.nome}`;
         option.dataset.preco = item.preco;
 
         if (categoria === 'whey') wheySelect.appendChild(option);
