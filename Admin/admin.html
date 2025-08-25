@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Administração de Itens</title>
+<link rel="stylesheet" href="admin.css">
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+<div class="container">
+  <h1>Cadastro de Itens</h1>
+
+  <label for="categoria">Categoria:</label>
+  <select id="categoria">
+    <option value="whey">Whey</option>
+    <option value="liquido">Líquido</option>
+    <option value="fruta">Fruta</option>
+  </select>
+
+  <label for="nomeItem">Nome do item:</label>
+  <input type="text" id="nomeItem" placeholder="Ex: Baunilha" required>
+
+  <label for="precoItem">Preço (R$):</label>
+  <input type="number" id="precoItem" placeholder="Ex: 5.50" step="0.01" required>
+
+  <button onclick="adicionarItem()">Adicionar Item</button>
+
+  <h2>Itens Cadastrados</h2>
+  <div id="itensCadastrados"></div>
+</div>
+
+<script src="admin.js" defer></script>
+</body>
+</html>
