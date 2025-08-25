@@ -12,7 +12,41 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 const pedidosRef = db.ref('pedidos');
+const itensRef = db.ref('itens'); // referência para os itens
 
+// Função para carregar itens do Firebase
+function carregarItens() {
+  itensRef.on('value', snapshot => {
+    const wheySelect = document.getElementById('whey');
+    const liquidoSelect = document.getElementById('liquido');
+    const frutaSelect = document.getElementById('fruta');
+
+    // Limpa selects
+    wheySelect.innerHTML = '';
+    liquidoSelect.innerHTML = '';
+    frutaSelect.innerHTML = '';
+
+    snapshot.forEach(categoriaSnap => {
+      const categoria = categoriaSnap.key;
+      categoriaSnap.forEach(itemSnap => {
+        const item = itemSnap.val();
+        const option = document.createElement('option');
+        option.value = item.nome;
+        option.textContent = `${item.nome} (R$${item.preco.toFixed(2)})`;
+        option.dataset.preco = item.preco;
+
+        if (categoria === 'whey') wheySelect.appendChild(option);
+        if (categoria === 'liquido') liquidoSelect.appendChild(option);
+        if (categoria === 'fruta') frutaSelect.appendChild(option);
+      });
+    });
+  });
+}
+
+// Chama ao carregar a página
+window.onload = carregarItens;
+
+// Função para finalizar pedido (seu código original)
 function finalizarPedido() {
   const nome = document.getElementById('nome').value.trim();
   const telefone = document.getElementById('telefone').value.trim();
@@ -66,4 +100,3 @@ function finalizarPedido() {
       alert("Erro ao enviar pedido: " + err);
     });
 }
-
