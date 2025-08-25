@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Monte seu Shake</title>
 <link rel="stylesheet" href="Style.css">
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
 <body>
 <div class="container">
@@ -31,12 +33,13 @@
     <option value="Maçã" data-preco="1.8">Maçã (R$1,80)</option>
   </select>
 
-  <button onclick="calcular()">Calcular e Resumir</button>
+  <button onclick="finalizarPedido()">Finalizar Pedido</button>
 
   <div class="resumo" id="resumo">
     Seu resumo aparecerá aqui.
   </div>
 </div>
+
 <script src="main.js" defer></script>
 </body>
 </html>
