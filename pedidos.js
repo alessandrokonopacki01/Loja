@@ -16,13 +16,15 @@ const pedidosRef = db.ref('pedidos');
 
 // Função para renderizar pedidos
 function renderPedidos(pedidosData) {
-    const pedidosDiv = document.getElementById('pedidos');
-    pedidosDiv.innerHTML = '';
-    pedidosData.forEach(p => {
-        const div = document.createElement('div');
-        div.className = 'pedido';
-        div.innerHTML = `
+  const pedidosDiv = document.getElementById('pedidos');
+  pedidosDiv.innerHTML = '';
+  pedidosData.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'pedido';
+    div.innerHTML = `
       <div>
+        <strong>Nome:</strong> ${p.nome} <br>
+        <strong>Telefone:</strong> ${p.telefone} <br>
         <strong>Whey:</strong> ${p.whey} <br>
         <strong>Líquido:</strong> ${p.liquido} <br>
         <strong>Fruta:</strong> ${p.fruta} <br>
@@ -30,22 +32,22 @@ function renderPedidos(pedidosData) {
       </div>
       <button onclick="entregarPedido('${p.id}')">Entregue</button>
     `;
-        pedidosDiv.appendChild(div);
-    });
+    pedidosDiv.appendChild(div);
+  });
 }
 
 // Ouvir mudanças no Firebase em tempo real
 pedidosRef.on('value', snapshot => {
-    const pedidosData = [];
-    snapshot.forEach(childSnapshot => {
-        const pedido = childSnapshot.val();
-        pedido.id = childSnapshot.key;
-        pedidosData.push(pedido);
-    });
-    renderPedidos(pedidosData);
+  const pedidosData = [];
+  snapshot.forEach(childSnapshot => {
+    const pedido = childSnapshot.val();
+    pedido.id = childSnapshot.key;
+    pedidosData.push(pedido);
+  });
+  renderPedidos(pedidosData);
 });
 
 // Remover pedido do Firebase
 function entregarPedido(id) {
-    pedidosRef.child(id).remove();
+  pedidosRef.child(id).remove();
 }
