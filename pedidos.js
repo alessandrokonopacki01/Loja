@@ -37,7 +37,7 @@ function renderPedidos(pedidosData) {
 }
 
 // Ouvir mudanças no Firebase em tempo real
-pedidosRef.on('value', snapshot => {
+pedidosRef.orderByChild('timestamp').on('value', snapshot => {
   const pedidosData = [];
   snapshot.forEach(childSnapshot => {
     const pedido = childSnapshot.val();
@@ -51,3 +51,4 @@ pedidosRef.on('value', snapshot => {
 function entregarPedido(id) {
   pedidosRef.child(id).remove();
 }
+
