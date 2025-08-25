@@ -34,6 +34,27 @@ function adicionarItem() {
     .catch(err => alert("Erro: " + err));
 }
 
+// Atualizar preço do item
+function atualizarItem(categoria, idItem) {
+  const novoPreco = prompt("Digite o novo preço:");
+  const precoNum = parseFloat(novoPreco);
+  if (isNaN(precoNum)) {
+    alert("Preço inválido!");
+    return;
+  }
+  itensRef.child(categoria).child(idItem).update({ preco: precoNum })
+    .then(() => alert("Preço atualizado com sucesso!"))
+    .catch(err => alert("Erro: " + err));
+}
+
+// Excluir item
+function excluirItem(categoria, idItem) {
+  if (!confirm("Deseja realmente excluir este item?")) return;
+  itensRef.child(categoria).child(idItem).remove()
+    .then(() => alert("Item excluído com sucesso!"))
+    .catch(err => alert("Erro: " + err));
+}
+
 // Listar itens cadastrados
 itensRef.on('value', snapshot => {
   const div = document.getElementById('itensCadastrados');
@@ -43,7 +64,14 @@ itensRef.on('value', snapshot => {
     div.innerHTML += `<h3>${categoria}</h3>`;
     categoriaSnap.forEach(itemSnap => {
       const item = itemSnap.val();
-      div.innerHTML += `<p>${item.nome} - R$${item.preco.toFixed(2)}</p>`;
+      const idItem = itemSnap.key;
+      div.innerHTML += `
+        <p>
+          ${item.nome} - R$${item.preco.toFixed(2)}
+          <button onclick="atualizarItem('${categoria}','${idItem}')">Editar</button>
+          <button onclick="excluirItem('${categoria}','${idItem}')">Excluir</button>
+        </p>
+      `;
     });
   });
 });
