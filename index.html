@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monte seu Shake</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
+  .container { max-width: 500px; margin: 50px auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);}
+  h1 { text-align: center; color: #333; }
+  label { display: block; margin-top: 15px; color: #555; }
+  select { width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; }
+  button { margin-top: 20px; width: 100%; padding: 10px; background: #28a745; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; }
+  button:hover { background: #218838; }
+  .resumo { margin-top: 20px; padding: 15px; background: #e9ecef; border-radius: 5px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Monte seu Shake</h1>
+  
+  <label for="whey">Escolha o Whey:</label>
+  <select id="whey">
+    <option value="Baunilha" data-preco="5">Baunilha (R$5)</option>
+    <option value="Chocolate" data-preco="5.5">Chocolate (R$5,50)</option>
+    <option value="Morango" data-preco="6">Morango (R$6)</option>
+  </select>
+
+  <label for="liquido">Escolha o líquido:</label>
+  <select id="liquido">
+    <option value="Leite" data-preco="2">Leite (R$2)</option>
+    <option value="Água" data-preco="0">Água (R$0)</option>
+    <option value="Leite de amêndoas" data-preco="3">Leite de amêndoas (R$3)</option>
+  </select>
+
+  <label for="fruta">Escolha a fruta:</label>
+  <select id="fruta">
+    <option value="Banana" data-preco="1.5">Banana (R$1,50)</option>
+    <option value="Morango" data-preco="2">Morango (R$2)</option>
+    <option value="Maçã" data-preco="1.8">Maçã (R$1,80)</option>
+  </select>
+
+  <button onclick="calcular()">Calcular e Resumir</button>
+
+  <div class="resumo" id="resumo">
+    Seu resumo aparecerá aqui.
+  </div>
+</div>
+
+<script>
+function calcular() {
+  const whey = document.getElementById('whey');
+  const liquido = document.getElementById('liquido');
+  const fruta = document.getElementById('fruta');
+
+  const wheyPreco = parseFloat(whey.selectedOptions[0].dataset.preco);
+  const liquidoPreco = parseFloat(liquido.selectedOptions[0].dataset.preco);
+  const frutaPreco = parseFloat(fruta.selectedOptions[0].dataset.preco);
+
+  const total = (wheyPreco + liquidoPreco + frutaPreco).toFixed(2);
+
+  const resumoDiv = document.getElementById('resumo');
+  resumoDiv.innerHTML = `
+    <strong>Seu Shake:</strong><br>
+    Whey: ${whey.value}<br>
+    Líquido: ${liquido.value}<br>
+    Fruta: ${fruta.value}<br>
+    <strong>Total aproximado: R$${total}</strong>
+  `;
+}
+</script>
+</body>
+</html>
