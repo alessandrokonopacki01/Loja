@@ -31,7 +31,6 @@ function finalizarPedido() {
 
   const total = (wheyPreco + liquidoPreco + frutaPreco).toFixed(2);
 
-  // Monta objeto do pedido
   const pedido = {
     nome: nome,
     telefone: telefone,
@@ -42,11 +41,12 @@ function finalizarPedido() {
     timestamp: Date.now()
   };
 
-  // Envia para o Firebase
   pedidosRef.push(pedido)
     .then(() => {
-      document.getElementById('resumo').innerHTML = `
-        Pedido enviado com sucesso!<br>
+      const resumoDiv = document.getElementById('resumo');
+      resumoDiv.className = "resumo pedido-concluido"; // aplica a classe com animação
+      resumoDiv.innerHTML = `
+        Pedido concluído!<br>
         Nome: ${pedido.nome}<br>
         Telefone: ${pedido.telefone}<br>
         Whey: ${pedido.whey} <br>
@@ -54,11 +54,16 @@ function finalizarPedido() {
         Fruta: ${pedido.fruta} <br>
         Total: R$${pedido.total.toFixed(2)}
       `;
-      // Limpa campos do formulário
-      document.getElementById('nome').value = '';
-      document.getElementById('telefone').value = '';
+      // Limpa campos do formulário após 2 segundos
+      setTimeout(() => {
+        resumoDiv.className = "resumo";
+        resumoDiv.innerHTML = "Seu resumo aparecerá aqui.";
+        document.getElementById('nome').value = '';
+        document.getElementById('telefone').value = '';
+      }, 2000);
     })
     .catch(err => {
       alert("Erro ao enviar pedido: " + err);
     });
 }
+
