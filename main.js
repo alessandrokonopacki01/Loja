@@ -14,37 +14,51 @@ const db = firebase.database();
 const pedidosRef = db.ref('pedidos');
 
 function finalizarPedido() {
-    const whey = document.getElementById('whey');
-    const liquido = document.getElementById('liquido');
-    const fruta = document.getElementById('fruta');
+  const nome = document.getElementById('nome').value.trim();
+  const telefone = document.getElementById('telefone').value.trim();
+  const whey = document.getElementById('whey');
+  const liquido = document.getElementById('liquido');
+  const fruta = document.getElementById('fruta');
 
-    const wheyPreco = parseFloat(whey.selectedOptions[0].dataset.preco);
-    const liquidoPreco = parseFloat(liquido.selectedOptions[0].dataset.preco);
-    const frutaPreco = parseFloat(fruta.selectedOptions[0].dataset.preco);
+  if (!nome || !telefone) {
+    alert("Por favor, preencha nome e telefone.");
+    return;
+  }
 
-    const total = (wheyPreco + liquidoPreco + frutaPreco).toFixed(2);
+  const wheyPreco = parseFloat(whey.selectedOptions[0].dataset.preco);
+  const liquidoPreco = parseFloat(liquido.selectedOptions[0].dataset.preco);
+  const frutaPreco = parseFloat(fruta.selectedOptions[0].dataset.preco);
 
-    // Monta objeto do pedido
-    const pedido = {
-        whey: whey.value,
-        liquido: liquido.value,
-        fruta: fruta.value,
-        total: parseFloat(total),
-        timestamp: Date.now()
-    };
+  const total = (wheyPreco + liquidoPreco + frutaPreco).toFixed(2);
 
-    // Envia para o Firebase
-    pedidosRef.push(pedido)
-        .then(() => {
-            document.getElementById('resumo').innerHTML = `
+  // Monta objeto do pedido
+  const pedido = {
+    nome: nome,
+    telefone: telefone,
+    whey: whey.value,
+    liquido: liquido.value,
+    fruta: fruta.value,
+    total: parseFloat(total),
+    timestamp: Date.now()
+  };
+
+  // Envia para o Firebase
+  pedidosRef.push(pedido)
+    .then(() => {
+      document.getElementById('resumo').innerHTML = `
         Pedido enviado com sucesso!<br>
+        Nome: ${pedido.nome}<br>
+        Telefone: ${pedido.telefone}<br>
         Whey: ${pedido.whey} <br>
         Líquido: ${pedido.liquido} <br>
         Fruta: ${pedido.fruta} <br>
         Total: R$${pedido.total.toFixed(2)}
       `;
-        })
-        .catch(err => {
-            alert("Erro ao enviar pedido: " + err);
-        });
+      // Limpa campos do formulário
+      document.getElementById('nome').value = '';
+      document.getElementById('telefone').value = '';
+    })
+    .catch(err => {
+      alert("Erro ao enviar pedido: " + err);
+    });
 }

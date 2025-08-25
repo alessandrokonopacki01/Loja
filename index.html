@@ -1,45 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Monte seu Shake</title>
-<link rel="stylesheet" href="Style.css">
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monte seu Shake</title>
+    <link rel="stylesheet" href="Style.css">
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
+
 <body>
-<div class="container">
-  <h1>Monte seu Shake</h1>
-  
-  <label for="whey">Escolha o Whey:</label>
-  <select id="whey">
-    <option value="Baunilha" data-preco="5">Baunilha (R$5)</option>
-    <option value="Chocolate" data-preco="5.5">Chocolate (R$5,50)</option>
-    <option value="Morango" data-preco="6">Morango (R$6)</option>
-  </select>
+    <div class="container">
+        <h1>Monte seu Shake</h1>
 
-  <label for="liquido">Escolha o líquido:</label>
-  <select id="liquido">
-    <option value="Leite" data-preco="2">Leite (R$2)</option>
-    <option value="Água" data-preco="0">Água (R$0)</option>
-    <option value="Leite de amêndoas" data-preco="3">Leite de amêndoas (R$3)</option>
-  </select>
+        <label for="whey">Escolha o Whey:</label>
+        <select id="whey">
+            <option value="Baunilha" data-preco="5">Baunilha (R$5)</option>
+            <option value="Chocolate" data-preco="5.5">Chocolate (R$5,50)</option>
+            <option value="Morango" data-preco="6">Morango (R$6)</option>
+        </select>
 
-  <label for="fruta">Escolha a fruta:</label>
-  <select id="fruta">
-    <option value="Banana" data-preco="1.5">Banana (R$1,50)</option>
-    <option value="Morango" data-preco="2">Morango (R$2)</option>
-    <option value="Maçã" data-preco="1.8">Maçã (R$1,80)</option>
-  </select>
+        <label for="liquido">Escolha o líquido:</label>
+        <select id="liquido">
+            <option value="Leite" data-preco="2">Leite (R$2)</option>
+            <option value="Água" data-preco="0">Água (R$0)</option>
+            <option value="Leite de amêndoas" data-preco="3">Leite de amêndoas (R$3)</option>
+        </select>
 
-  <button onclick="finalizarPedido()">Finalizar Pedido</button>
+        <label for="fruta">Escolha a fruta:</label>
+        <select id="fruta">
+            <option value="Banana" data-preco="1.5">Banana (R$1,50)</option>
+            <option value="Morango" data-preco="2">Morango (R$2)</option>
+            <option value="Maçã" data-preco="1.8">Maçã (R$1,80)</option>
+        </select>
+        
+        <h1>Confirme sua identidade</h1>
 
-  <div class="resumo" id="resumo">
-    Seu resumo aparecerá aqui.
-  </div>
-</div>
+        <label for="nome">Nome completo:</label>
+        <input type="text" id="nome" placeholder="Seu nome completo" required>
 
-<script src="main.js" defer></script>
+        <label for="telefone">Telefone:</label>
+        <input type="tel" id="telefone" placeholder="(99) 99999-9999" required>
+
+
+        <button onclick="finalizarPedido()">Finalizar Pedido</button>
+
+        <div class="resumo" id="resumo">
+            Seu resumo aparecerá aqui.
+        </div>
+    </div>
+
+    <script src="main.js" defer></script>
 </body>
+
 </html>
