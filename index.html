@@ -4,16 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Monte seu Shake</title>
-<style>
-  body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
-  .container { max-width: 500px; margin: 50px auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);}
-  h1 { text-align: center; color: #333; }
-  label { display: block; margin-top: 15px; color: #555; }
-  select { width: 100%; padding: 8px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; }
-  button { margin-top: 20px; width: 100%; padding: 10px; background: #28a745; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; }
-  button:hover { background: #218838; }
-  .resumo { margin-top: 20px; padding: 15px; background: #e9ecef; border-radius: 5px; }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="container">
@@ -46,28 +37,6 @@
     Seu resumo aparecerá aqui.
   </div>
 </div>
-
-<script>
-function calcular() {
-  const whey = document.getElementById('whey');
-  const liquido = document.getElementById('liquido');
-  const fruta = document.getElementById('fruta');
-
-  const wheyPreco = parseFloat(whey.selectedOptions[0].dataset.preco);
-  const liquidoPreco = parseFloat(liquido.selectedOptions[0].dataset.preco);
-  const frutaPreco = parseFloat(fruta.selectedOptions[0].dataset.preco);
-
-  const total = (wheyPreco + liquidoPreco + frutaPreco).toFixed(2);
-
-  const resumoDiv = document.getElementById('resumo');
-  resumoDiv.innerHTML = `
-    <strong>Seu Shake:</strong><br>
-    Whey: ${whey.value}<br>
-    Líquido: ${liquido.value}<br>
-    Fruta: ${fruta.value}<br>
-    <strong>Total aproximado: R$${total}</strong>
-  `;
-}
-</script>
+<script src="script.js" defer></script>
 </body>
 </html>
