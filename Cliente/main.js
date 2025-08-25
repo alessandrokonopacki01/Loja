@@ -88,13 +88,13 @@ function finalizarPedido() {
         Fruta: ${pedido.fruta} <br>
         Total: R$${pedido.total.toFixed(2)}
       `;
-      // Limpa campos do formulário após 2 segundos
+      // Limpa campos do formulário após 10 segundos
       setTimeout(() => {
         resumoDiv.className = "resumo";
         resumoDiv.innerHTML = "Seu resumo aparecerá aqui.";
         document.getElementById('nome').value = '';
         document.getElementById('telefone').value = '';
-      }, 2000);
+      }, 10000);
     })
     .catch(err => {
       alert("Erro ao enviar pedido: " + err);
