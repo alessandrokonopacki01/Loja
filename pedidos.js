@@ -1,12 +1,13 @@
 // Configuração do Firebase
 const firebaseConfig = {
-  apiKey: "SUA_API_KEY",
-  authDomain: "SEU_AUTH_DOMAIN",
-  databaseURL: "SUA_DATABASE_URL",
-  projectId: "SEU_PROJECT_ID",
-  storageBucket: "SEU_STORAGE_BUCKET",
-  messagingSenderId: "SEU_MESSAGING_SENDER_ID",
-  appId: "SEU_APP_ID"
+    apiKey: "AIzaSyAVTDL2V_QSbDpuaBkj3udu076SWB6slEo",
+    authDomain: "loja-39682.firebaseapp.com",
+    databaseURL: "https://loja-39682-default-rtdb.firebaseio.com/",
+    projectId: "loja-39682",
+    storageBucket: "loja-39682.firebasestorage.app",
+    messagingSenderId: "670675092880",
+    appId: "1:670675092880:web:d3842a07053073b9bc1f15",
+    measurementId: "G-JSR2LNV3TL"
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -15,12 +16,12 @@ const pedidosRef = db.ref('pedidos');
 
 // Função para renderizar pedidos
 function renderPedidos(pedidosData) {
-  const pedidosDiv = document.getElementById('pedidos');
-  pedidosDiv.innerHTML = '';
-  pedidosData.forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'pedido';
-    div.innerHTML = `
+    const pedidosDiv = document.getElementById('pedidos');
+    pedidosDiv.innerHTML = '';
+    pedidosData.forEach(p => {
+        const div = document.createElement('div');
+        div.className = 'pedido';
+        div.innerHTML = `
       <div>
         <strong>Whey:</strong> ${p.whey} <br>
         <strong>Líquido:</strong> ${p.liquido} <br>
@@ -29,22 +30,22 @@ function renderPedidos(pedidosData) {
       </div>
       <button onclick="entregarPedido('${p.id}')">Entregue</button>
     `;
-    pedidosDiv.appendChild(div);
-  });
+        pedidosDiv.appendChild(div);
+    });
 }
 
 // Ouvir mudanças no Firebase em tempo real
 pedidosRef.on('value', snapshot => {
-  const pedidosData = [];
-  snapshot.forEach(childSnapshot => {
-    const pedido = childSnapshot.val();
-    pedido.id = childSnapshot.key;
-    pedidosData.push(pedido);
-  });
-  renderPedidos(pedidosData);
+    const pedidosData = [];
+    snapshot.forEach(childSnapshot => {
+        const pedido = childSnapshot.val();
+        pedido.id = childSnapshot.key;
+        pedidosData.push(pedido);
+    });
+    renderPedidos(pedidosData);
 });
 
 // Remover pedido do Firebase
 function entregarPedido(id) {
-  pedidosRef.child(id).remove();
+    pedidosRef.child(id).remove();
 }
